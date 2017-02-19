@@ -38,7 +38,7 @@ class EventsViewController: UIViewController {
         // Subscribe to `test-event`
         
         // Create EventListener to handle changes to an event
-        final class SubscriberEventListener : NSObject, EventListener {
+        final class DSEventListener : NSObject, EventListener {
             private var textView : UITextView!
             
             init(textView: UITextView) {
@@ -58,7 +58,7 @@ class EventsViewController: UIViewController {
         }
         
         // Subscribe to an event and provide an EventListener that can handle the changes
-        self.client?.event.subscribe("test-event", eventListener: SubscriberEventListener(textView: self.subscribeTextView))
+        self.client?.event.subscribe("test-event", eventListener: DSEventListener(textView: self.subscribeTextView))
     }
     
     // Whenever the user clicks the button

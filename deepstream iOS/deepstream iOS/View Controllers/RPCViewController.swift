@@ -10,18 +10,6 @@ import UIKit
 
 typealias RpcRequestedListenerHandler = ((String, Any, RpcResponse) -> Void)
 
-final class DSRpcRequestedListener : NSObject, RpcRequestedListener {
-    private var handler : RpcRequestedListenerHandler!
-    
-    init(handler: @escaping RpcRequestedListenerHandler) {
-        self.handler = handler
-    }
-    
-    func onRPCRequested(_ rpcName: String!, data: Any!, response: RpcResponse!) {
-        self.handler(rpcName, data, response)
-    }
-}
-
 class RPCViewController: UIViewController {
     
     @IBOutlet weak var makeMultiplyButton: UIButton! {
@@ -51,6 +39,18 @@ class RPCViewController: UIViewController {
 
         /////////////////////////////////////////
     
+        final class DSRpcRequestedListener : NSObject, RpcRequestedListener {
+            private var handler : RpcRequestedListenerHandler!
+            
+            init(handler: @escaping RpcRequestedListenerHandler) {
+                self.handler = handler
+            }
+            
+            func onRPCRequested(_ rpcName: String!, data: Any!, response: RpcResponse!) {
+                self.handler(rpcName, data, response)
+            }
+        }
+        
         client.rpc.provide("multiply-number",
                            rpcRequestedListener: DSRpcRequestedListener { (rpcName, data, response) in
                             print("RPC Provider: Got an RPC request")
