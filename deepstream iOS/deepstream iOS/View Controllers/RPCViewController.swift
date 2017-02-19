@@ -8,12 +8,12 @@
 
 import UIKit
 
-typealias PublisherRpcRequestedListenerHandler = ((String, Any, RpcResponse) -> Void)
+typealias RpcRequestedListenerHandler = ((String, Any, RpcResponse) -> Void)
 
-final class PublisherRpcRequestedListener : NSObject, RpcRequestedListener {
-    private var handler : PublisherRpcRequestedListenerHandler!
+final class DSRpcRequestedListener : NSObject, RpcRequestedListener {
+    private var handler : RpcRequestedListenerHandler!
     
-    init(handler: @escaping PublisherRpcRequestedListenerHandler) {
+    init(handler: @escaping RpcRequestedListenerHandler) {
         self.handler = handler
     }
     
@@ -52,7 +52,7 @@ class RPCViewController: UIViewController {
         /////////////////////////////////////////
     
         client.rpc.provide("multiply-number",
-                           rpcRequestedListener: PublisherRpcRequestedListener { (rpcName, data, response) in
+                           rpcRequestedListener: DSRpcRequestedListener { (rpcName, data, response) in
                             print("RPC Provider: Got an RPC request")
                             
                             guard let value = (data as? Float) else {
