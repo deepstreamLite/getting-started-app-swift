@@ -4,6 +4,6 @@
 target 'deepstream iOS' do
   use_frameworks!
 
-  pod 'DeepstreamIO'
+  pod 'DeepstreamIO', '~> 2.0.0'
 
 end
