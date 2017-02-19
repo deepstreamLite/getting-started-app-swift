@@ -50,7 +50,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         client.setRuntimeErrorHandler(RuntimeErrorHandler())
         
         // Set up a 'Connection State' Listener to listen to changes in connection
-        client.addConnectionChangeListener(with: AppConnectionStateListener())
+        client.addConnectionChange(AppConnectionStateListener())
         
         // Authenticate your connection. We haven't activated auth,
         // so this method can be called without arguments

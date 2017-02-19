@@ -46,7 +46,7 @@ class EventsViewController: UIViewController {
                 super.init()
             }
             
-            func onEvent(with eventName: String!, withId args: Any!) {
+            func onEvent(_ eventName: String!, args: Any!) {
                 guard let value = args as? String else {
                     print("Error: Unable to cast args as String")
                     return
@@ -58,7 +58,7 @@ class EventsViewController: UIViewController {
         }
         
         // Subscribe to an event and provide an EventListener that can handle the changes
-        self.client?.event.subscribe(with: "test-event", with: SubscriberEventListener(textView: self.subscribeTextView))
+        self.client?.event.subscribe("test-event", eventListener: SubscriberEventListener(textView: self.subscribeTextView))
     }
     
     // Whenever the user clicks the button
@@ -69,7 +69,7 @@ class EventsViewController: UIViewController {
             return
         }
         print("Publisher: Emitting event \(text)")
-        self.client?.event.emit(with: "test-event", withId: text)
+        self.client?.event.emit("test-event", data: text)
     }
 }
 
